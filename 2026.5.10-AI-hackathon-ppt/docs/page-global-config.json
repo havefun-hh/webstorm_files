@@ -1,0 +1,14 @@
+{
+  "slideStyle": "Tech",
+  "colorScheme": "Deep Tech Dark Style",
+  "primaryColor": "#00D4FF",
+  "accentColor1": "#6C63FF",
+  "accentColor2": "#00FF88",
+  "neutralColor": "#8892A4",
+  "background": {
+    "type": "gradient",
+    "value": "linear-gradient(135deg, #0A1628 0%, #0D1F3C 50%, #0A1628 100%)"
+  },
+  "fontTitle": "'Montserrat', 'Noto Sans SC', sans-serif",
+  "fontBody": "'Inter', 'Noto Sans SC', sans-serif"
+}

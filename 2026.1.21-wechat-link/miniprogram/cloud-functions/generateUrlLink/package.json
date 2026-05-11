@@ -1,0 +1,9 @@
+{
+  "name": "generateUrlLink",
+  "version": "1.0.0",
+  "description": "生成微信小程序 URL Link 的云函数",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

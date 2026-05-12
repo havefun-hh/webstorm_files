@@ -23,6 +23,9 @@
         .nav-btn, .page-indicator {
             display: none;
         }
+        .fullscreen-btn, .slide-sidebar {
+            display: none;
+        }
     </style>
     <script>
         // # 禁止修改
@@ -31,28 +34,41 @@
 </head>
 <body>
     <!-- PPT 容器 -->
-    <div class="ppt-container">
+    <div class="ppt-container edit-mode">
+        <!-- 导航按钮 -->
+        <button class="nav-btn nav-btn-prev" id="prevBtn" aria-label="上一页">
+            ←
+        </button>
+        <button class="nav-btn nav-btn-next" id="nextBtn" aria-label="下一页">
+            →
+        </button>
+
+        <!-- 进度条 -->
+        <div class="progress-bar">
+            <div class="progress-bar-fill" id="progressBarFill"></div>
+        </div>
+
+        <!-- 页码指示器 -->
+        <div class="page-indicator" id="pageIndicator">
+            1 / 1
+        </div>
+
+        <!-- 全屏切换按钮 -->
+        <button class="fullscreen-btn" id="fullscreenBtn" aria-label="全屏演示">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 3 21 3 21 9"></polyline>
+                <polyline points="9 21 3 21 3 15"></polyline>
+                <line x1="21" y1="3" x2="14" y2="10"></line>
+                <line x1="3" y1="21" x2="10" y2="14"></line>
+            </svg>
+        </button>
+        <!-- 缩略图侧栏 -->
+        <div class="slide-sidebar" id="slideSidebar">
+            <!-- 缩略图由 JS 动态生成 -->
+        </div>
         <div class="ppt-viewport" id="ppt-viewport">
             <!-- 幻灯片将由 JavaScript 动态插入 -->
         </div>
-    </div>
-    
-    <!-- 导航按钮 -->
-    <button class="nav-btn nav-btn-prev" id="prevBtn" aria-label="上一页">
-        ←
-    </button>
-    <button class="nav-btn nav-btn-next" id="nextBtn" aria-label="下一页">
-        →
-    </button>
-    
-    <!-- 进度条 -->
-    <div class="progress-bar">
-        <div class="progress-bar-fill" id="progressBarFill"></div>
-    </div>
-    
-    <!-- 页码指示器 -->
-    <div class="page-indicator" id="pageIndicator">
-        1 / 1
     </div>
     
     <!-- Vite Main Entry -->

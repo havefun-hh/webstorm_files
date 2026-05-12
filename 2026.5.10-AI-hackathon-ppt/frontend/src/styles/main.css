@@ -94,7 +94,7 @@ body {
 
 /* 导航按钮 */
 .nav-btn {
-    position: fixed;
+    position: absolute;
     top: 50%;
     transform: translateY(-50%);
     width: 60px;
@@ -138,7 +138,7 @@ body {
 
 /* 进度条 */
 .progress-bar {
-    position: fixed;
+    position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
@@ -155,7 +155,7 @@ body {
 
 /* 页码指示器 */
 .page-indicator {
-    position: fixed;
+    position: absolute;
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
@@ -166,6 +166,186 @@ body {
     font-size: 14px;
     z-index: 1000;
     display: block;
+}
+
+/* 全屏切换按钮 */
+.fullscreen-btn {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.8);
+    z-index: 150;
+    transition: all 0.25s ease;
+}
+
+.fullscreen-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.35);
+    color: #fff;
+}
+
+/* 全屏按钮切换图标：全屏 → 退出全屏 */
+.fullscreen-btn.is-fullscreen svg {
+    display: none;
+}
+.fullscreen-btn.is-fullscreen::after {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 20px;
+    background: currentColor;
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='4 14 10 14 10 20'%3E%3C/polyline%3E%3Cpolyline points='20 10 14 10 14 4'%3E%3C/polyline%3E%3Cline x1='14' y1='10' x2='21' y2='3'%3E%3C/line%3E%3Cline x1='3' y1='21' x2='10' y2='14'%3E%3C/line%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='4 14 10 14 10 20'%3E%3C/polyline%3E%3Cpolyline points='20 10 14 10 14 4'%3E%3C/polyline%3E%3Cline x1='14' y1='10' x2='21' y2='3'%3E%3C/line%3E%3Cline x1='3' y1='21' x2='10' y2='14'%3E%3C/line%3E%3C/svg%3E");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+}
+
+/* 缩略图侧栏 */
+.slide-sidebar {
+    width: 180px;
+    min-width: 180px;
+    height: 100%;
+    background: #080F1A;
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 12px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 100;
+    transition: width 0.3s ease, min-width 0.3s ease, padding 0.3s ease, opacity 0.3s ease;
+}
+
+.slide-sidebar::-webkit-scrollbar {
+    width: 4px;
+}
+.slide-sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+.slide-sidebar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 2px;
+}
+.slide-sidebar::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+/* 缩略图项 */
+.thumb-item {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 4px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    flex-shrink: 0;
+}
+
+.thumb-item:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.thumb-item.active {
+    border-color: var(--primary-color, #00D4FF);
+    box-shadow: 0 0 12px rgba(0, 212, 255, 0.3);
+}
+
+/* 缩略图内容（slide 缩放渲染） */
+.thumb-item .thumb-content {
+    width: 1440px;
+    height: 810px;
+    transform-origin: top left;
+    pointer-events: none;
+}
+
+/* 缩略图页码 */
+.thumb-item .thumb-number {
+    position: absolute;
+    bottom: 4px;
+    right: 6px;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.7);
+    font-family: 'Inter', sans-serif;
+    pointer-events: none;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* ========== 布局模式切换 ========== */
+
+/* 编辑模式（默认）：左侧侧栏 + 右侧视口 */
+.edit-mode {
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    background: #080F1A;
+}
+
+/* 编辑模式下侧栏用绝对定位，不参与 flex 流 */
+.edit-mode .slide-sidebar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    display: flex !important;
+}
+
+/* 编辑模式下全屏按钮在右下角 */
+.edit-mode .fullscreen-btn {
+    right: 16px;
+}
+
+/* 编辑模式下页码指示器在侧栏右侧区域居中 */
+.edit-mode .page-indicator {
+    left: calc(180px + 50%);
+    transform: translateX(-50%);
+}
+
+/* 编辑模式下的进度条从侧栏右侧开始 */
+.edit-mode .progress-bar {
+    position: absolute;
+    bottom: 0;
+    left: 180px;
+    right: 0;
+    width: auto;
+}
+
+/* 全屏模式：隐藏侧栏，视口居中 */
+.fullscreen-mode {
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+}
+
+.fullscreen-mode .slide-sidebar {
+    width: 0;
+    min-width: 0;
+    padding: 0;
+    opacity: 0;
+    overflow: hidden;
+    border-right: none;
+}
+
+.fullscreen-mode .progress-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
 }
 
 /* 键盘导航提示 */

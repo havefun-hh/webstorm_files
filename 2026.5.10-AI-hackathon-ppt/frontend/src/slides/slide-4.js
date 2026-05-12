@@ -18,7 +18,7 @@ window.slideDataMap.set(4, `
       <!-- 核心背景框 -->
       <div style="background:rgba(0,10,30,0.8);border:1px solid rgba(0,212,255,0.3);padding:18px 24px;border-radius:4px;margin-bottom:20px;backdrop-filter:blur(8px);">
         <p style="color:#CBD5E0;font-size:17px;font-family:'Inter','Noto Sans SC',sans-serif;line-height:1.7;">
-          当前研发模式下，一名开发者需独立承担 <span style="color:#00D4FF;font-weight:700;">需求分析、编码、Code Review、测试、运维</span> 全链路工作。编码以外的任务占据 <span style="color:#FBBF24;font-weight:700;">40%~60% 有效工时</span>，大量精力被非核心工作消耗。
+          当前研发模式下，一名开发者需独立承担 <span style="color:#00D4FF;font-weight:700;">需求分析、编码、Code Review、测试</span> 全链路工作。这些环节环环相扣， <span style="color:#FBBF24;font-weight:700;">全部串行压在一人身上</span>，吞吐效率天然受制于单个人力上限。
         </p>
       </div>
 
@@ -30,15 +30,15 @@ window.slideDataMap.set(4, `
             <div style="width:32px;height:32px;background:rgba(0,212,255,0.2);border:1.5px solid #00D4FF;display:flex;align-items:center;justify-content:center;font-family:'Courier New',monospace;font-size:13px;font-weight:900;color:#00D4FF;">01</div>
             <h4 style="font-size:18px;font-weight:700;color:#00D4FF;font-family:'Montserrat','Noto Sans SC',sans-serif;">需求拆解耗时</h4>
           </div>
-          <p style="font-size:15px;color:#8892A4;font-family:'Inter','Noto Sans SC',sans-serif;line-height:1.7;">中等复杂度功能，从 PRD 理解到任务拆解需消耗 <span style="color:#E2E8F0;">1~2 小时</span>有效工作时间，且易遗漏细节导致频繁返工。</p>
+          <p style="font-size:15px;color:#8892A4;font-family:'Inter','Noto Sans SC',sans-serif;line-height:1.7;">从 PRD 理解到任务拆解，人工梳理<span style="color:#E2E8F0;">极易遗漏边界条件与异常场景</span>，导致实现偏差与频繁返工。AI 可作为第二双眼睛，系统化扫描遗漏点、补全细节。</p>
         </div>
         <!-- 痛点 02 -->
         <div style="background:rgba(108,99,255,0.07);border:1px solid rgba(108,99,255,0.25);padding:20px 22px;border-radius:4px;">
           <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
             <div style="width:32px;height:32px;background:rgba(108,99,255,0.2);border:1.5px solid #6C63FF;display:flex;align-items:center;justify-content:center;font-family:'Courier New',monospace;font-size:13px;font-weight:900;color:#6C63FF;">02</div>
-            <h4 style="font-size:18px;font-weight:700;color:#6C63FF;font-family:'Montserrat','Noto Sans SC',sans-serif;">编码之外的沉重负担</h4>
+            <h4 style="font-size:18px;font-weight:700;color:#6C63FF;font-family:'Montserrat','Noto Sans SC',sans-serif;">全链路串行，人力是瓶颈</h4>
           </div>
-          <p style="font-size:15px;color:#8892A4;font-family:'Inter','Noto Sans SC',sans-serif;line-height:1.7;">Code Review、单测编写、集成测试、日志排查……这些工作占开发者 <span style="color:#E2E8F0;">40%~60%</span> 时间，却与核心业务逻辑无直接关系。</p>
+          <p style="font-size:15px;color:#8892A4;font-family:'Inter','Noto Sans SC',sans-serif;line-height:1.7;">Code Review、单测编写、集成测试……每个环节都不可跳过，却只能 <span style="color:#E2E8F0;">一人一步串行推进</span> ，单人的时间与精力成为整个研发链路的瓶颈。</p>
         </div>
         <!-- 痛点 03 -->
         <div style="background:rgba(0,255,136,0.06);border:1px solid rgba(0,255,136,0.2);padding:20px 22px;border-radius:4px;">
@@ -46,7 +46,7 @@ window.slideDataMap.set(4, `
             <div style="width:32px;height:32px;background:rgba(0,255,136,0.12);border:1.5px solid #00FF88;display:flex;align-items:center;justify-content:center;font-family:'Courier New',monospace;font-size:13px;font-weight:900;color:#00FF88;">03</div>
             <h4 style="font-size:18px;font-weight:700;color:#00FF88;font-family:'Montserrat','Noto Sans SC',sans-serif;">AI 工具单点分散</h4>
           </div>
-          <p style="font-size:15px;color:#8892A4;font-family:'Inter','Noto Sans SC',sans-serif;line-height:1.7;">现有 Copilot 类工具仅解决代码补全问题，<span style="color:#E2E8F0;">没有形成跨角色、跨环节</span>的系统化协作能力，研发流程仍需人工串联。</p>
+          <p style="font-size:15px;color:#8892A4;font-family:'Inter','Noto Sans SC',sans-serif;line-height:1.7;">各类 AI 工具各自为战，能力局限于单一环节，<span style="color:#E2E8F0;">缺乏跨角色、跨环节</span>的系统化协作能力，研发流程仍需人工串联。</p>
         </div>
         <!-- 痛点 04 -->
         <div style="background:rgba(251,191,36,0.06);border:1px solid rgba(251,191,36,0.2);padding:20px 22px;border-radius:4px;">

@@ -61,13 +61,50 @@ window.slideDataMap.set(14, `
           <h3 style="font-size:20px;font-weight:700;color:#A78BFA;font-family:'Montserrat','Noto Sans SC',sans-serif;">Demo 演示</h3>
           <p style="font-size:14px;color:#8892A4;font-family:'Inter','Noto Sans SC',sans-serif;line-height:1.6;">选用真实需求进行端到端实操：PRD → spec-kit → Multica → Agent 协作 → 代码产出完整链路验证。</p>
 
-          <!-- 演示视频占位 -->
-          <div style="flex:1;border:2px dashed rgba(167,139,250,0.4);border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(167,139,250,0.04);position:relative;min-height:180px;">
-            <div style="font-size:36px;margin-bottom:12px;">🎬</div>
-            <div style="font-size:17px;font-weight:700;color:#A78BFA;font-family:'Montserrat','Noto Sans SC',sans-serif;margin-bottom:6px;">演示视频</div>
-            <div style="font-size:13px;color:#8892A4;font-family:'Courier New',monospace;letter-spacing:1px;">[ 待补充 · 占位区域 ]</div>
-            <div style="position:absolute;top:8px;right:10px;font-size:11px;color:rgba(167,139,250,0.5);font-family:'Courier New',monospace;">PLACEHOLDER</div>
+          <!-- 演示视频播放器 -->
+          <div id="video-container" style="flex:1;border:1.5px solid rgba(167,139,250,0.35);border-radius:6px;display:flex;flex-direction:column;overflow:hidden;background:#000;position:relative;min-height:180px;">
+            <video id="demo-video" preload="metadata" playsinline style="width:100%;flex:1;object-fit:contain;display:block;">
+              <source src="/videos/multica演示1.mp4" type="video/mp4">
+            </video>
+            <!-- 播放按钮遮罩层（不覆盖底部控制栏） -->
+            <div id="video-overlay" style="position:absolute;top:0;left:0;right:0;bottom:32px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(0,0,0,0.55);cursor:pointer;z-index:5;" onclick="(function(){var v=document.getElementById('demo-video');v.play();this.style.display='none';})()">
+              <div style="width:56px;height:56px;background:rgba(167,139,250,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:10px;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="#fff"><polygon points="8,5 20,12 8,19"/></svg>
+              </div>
+              <div style="font-size:14px;font-weight:700;color:#A78BFA;font-family:'Montserrat','Noto Sans SC',sans-serif;">点击播放演示录屏</div>
+            </div>
+            <!-- 底部控制栏（绝对定位贴底） -->
+            <div style="position:absolute;bottom:0;left:0;right:0;display:flex;align-items:center;gap:8px;padding:5px 10px;background:rgba(10,15,30,0.92);border-top:1px solid rgba(167,139,250,0.2);z-index:10;">
+              <button id="video-play-btn" style="background:none;border:none;cursor:pointer;color:#A78BFA;font-size:16px;display:flex;align-items:center;" onclick="(function(){var v=document.getElementById('demo-video'),o=document.getElementById('video-overlay'),b=document.getElementById('video-play-btn');if(v.paused){v.play();o.style.display='none';b.innerHTML='<svg width=\\'14\\' height=\\'14\\' viewBox=\\'0 0 24 24\\' fill=\\'currentColor\\'><rect x=\\'6\\' y=\\'4\\' width=\\'4\\' height=\\'16\\'/><rect x=\\'14\\' y=\\'4\\' width=\\'4\\' height=\\'16\\'/></svg>';}else{v.pause();b.innerHTML='<svg width=\\'14\\' height=\\'14\\' viewBox=\\'0 0 24 24\\' fill=\\'currentColor\\'><polygon points=\\'8,5 20,12 8,19\\'/></svg>';}})()">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="8,5 20,12 8,19"/></svg>
+              </button>
+              <div style="flex:1;height:4px;background:rgba(167,139,250,0.2);border-radius:2px;overflow:hidden;cursor:pointer;" onclick="(function(e){var v=document.getElementById('demo-video'),r=e.currentTarget.getBoundingClientRect();v.currentTime=((e.clientX-r.left)/r.width)*v.duration;})()">
+                <div id="video-progress" style="height:100%;width:0%;background:#A78BFA;border-radius:2px;transition:width 0.1s linear;"></div>
+              </div>
+              <button style="background:none;border:none;cursor:pointer;color:#8892A4;font-size:14px;display:flex;align-items:center;padding:2px;" onclick="document.getElementById('demo-video').requestFullscreen()" title="全屏播放">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+              </button>
+            </div>
           </div>
+          <script>
+          (function(){
+            var v=document.getElementById('demo-video');
+            if(!v) return;
+            v.addEventListener('timeupdate',function(){
+              var p=document.getElementById('video-progress');
+              if(p&&v.duration) p.style.width=(v.currentTime/v.duration*100)+'%';
+            });
+            v.addEventListener('play',function(){
+              var o=document.getElementById('video-overlay');if(o)o.style.display='none';
+              var b=document.getElementById('video-play-btn');
+              if(b) b.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
+            });
+            v.addEventListener('pause',function(){
+              var b=document.getElementById('video-play-btn');
+              if(b) b.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="8,5 20,12 8,19"/></svg>';
+            });
+          })();
+          </script>
 
           <!-- 工具截图占位 -->
           <div style="flex:1;border:2px dashed rgba(0,212,255,0.4);border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(0,212,255,0.03);position:relative;min-height:180px;">

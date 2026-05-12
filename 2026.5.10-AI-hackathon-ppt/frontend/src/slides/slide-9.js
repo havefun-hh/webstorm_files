@@ -31,59 +31,148 @@ window.slideDataMap.set(9, `
 
         <!-- SVG 工作流图 -->
         <div style="background:rgba(0,10,30,0.8);border:1px solid rgba(0,212,255,0.2);padding:18px 24px;border-radius:4px;">
-          <svg width="100%" height="140" viewBox="0 0 1300 140">
+          <svg width="100%" height="140" viewBox="0 0 1300 140" class="workflow-svg">
             <defs>
               <marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
                 <polygon points="0 0, 8 3, 0 6" fill="#00D4FF"/>
               </marker>
+              <marker id="arr-purple" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+                <polygon points="0 0, 8 3, 0 6" fill="#6C63FF"/>
+              </marker>
+              <marker id="arr-green" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+                <polygon points="0 0, 8 3, 0 6" fill="#00FF88"/>
+              </marker>
+              <marker id="arr-yellow" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+                <polygon points="0 0, 8 3, 0 6" fill="#FBBF24"/>
+              </marker>
               <marker id="arr2" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
                 <polygon points="0 0, 8 3, 0 6" fill="#F87171"/>
               </marker>
+              <!-- 流动粒子：沿路径移动的小圆点 -->
+              <circle id="flow-dot-tpl" r="3" opacity="0.9">
+                <animate attributeName="opacity" values="0.9;0.3;0.9" dur="1.5s" repeatCount="indefinite"/>
+              </circle>
             </defs>
-            <!-- 节点 -->
-            <rect x="10" y="45" width="130" height="50" rx="4" fill="#0A1628" stroke="#00D4FF" stroke-width="1.5"/>
+
+            <!-- 流动动画样式 -->
+            <style>
+              .workflow-svg path.flow {
+                stroke-dasharray: 8, 12;
+                animation: flow 1.2s linear infinite;
+                filter: drop-shadow(0 0 4px currentColor);
+              }
+              .workflow-svg path.flow-reverse {
+                stroke-dasharray: 6, 10;
+                animation: flow-reverse 1.8s linear infinite;
+                filter: drop-shadow(0 0 4px currentColor);
+              }
+              @keyframes flow {
+                to { stroke-dashoffset: -20; }
+              }
+              @keyframes flow-reverse {
+                to { stroke-dashoffset: 20; }
+              }
+              /* 节点悬停高亮 */
+              .workflow-svg .node-rect:hover {
+                stroke-width: 2.5;
+                filter: drop-shadow(0 0 8px currentColor);
+                transition: all 0.3s ease;
+              }
+            </style>
+
+            <!-- ===== 节点 ===== -->
+            <!-- PRD -->
+            <rect class="node-rect" x="10" y="45" width="130" height="50" rx="4" fill="#0A1628" stroke="#00D4FF" stroke-width="1.5"/>
             <text x="75" y="67" text-anchor="middle" fill="#00D4FF" font-size="13" font-weight="bold">PRD</text>
             <text x="75" y="85" text-anchor="middle" fill="#8892A4" font-size="11">需求文档</text>
-            
-            <path d="M140 70 L175 70" stroke="#00D4FF" stroke-width="1.5" marker-end="url(#arr)"/>
-            
-            <rect x="175" y="45" width="160" height="50" rx="4" fill="#0A1628" stroke="#00D4FF" stroke-width="1.5"/>
+
+            <!-- 连线1: PRD → spec-kit -->
+            <path class="flow" d="M140 70 L175 70" stroke="#00D4FF" stroke-width="1.5" marker-end="url(#arr)"/>
+            <!-- 流动粒子1 -->
+            <circle r="3" fill="#00D4FF" opacity="0.9">
+              <animateMotion dur="1.5s" repeatCount="indefinite" path="M140 70 L175 70"/>
+              <animate attributeName="opacity" values="0.9;0.2;0.9" dur="1.5s" repeatCount="indefinite"/>
+            </circle>
+
+            <!-- spec-kit -->
+            <rect class="node-rect" x="175" y="45" width="160" height="50" rx="4" fill="#0A1628" stroke="#00D4FF" stroke-width="1.5"/>
             <text x="255" y="67" text-anchor="middle" fill="#00D4FF" font-size="13" font-weight="bold">spec-kit</text>
             <text x="255" y="85" text-anchor="middle" fill="#8892A4" font-size="11">拆解为 Story/Task</text>
-            
-            <path d="M335 70 L370 70" stroke="#00D4FF" stroke-width="1.5" marker-end="url(#arr)"/>
-            
-            <rect x="370" y="45" width="160" height="50" rx="4" fill="#0A1628" stroke="#6C63FF" stroke-width="1.5"/>
+
+            <!-- 连线2: spec-kit → Multica -->
+            <path class="flow" d="M335 70 L370 70" stroke="#00D4FF" stroke-width="1.5" marker-end="url(#arr)"/>
+            <circle r="3" fill="#00D4FF" opacity="0.9">
+              <animateMotion dur="1.5s" repeatCount="indefinite" begin="0.2s" path="M335 70 L370 70"/>
+              <animate attributeName="opacity" values="0.9;0.2;0.9" dur="1.5s" repeatCount="indefinite" begin="0.2s"/>
+            </circle>
+
+            <!-- Multica 总指挥 -->
+            <rect class="node-rect" x="370" y="45" width="160" height="50" rx="4" fill="#0A1628" stroke="#6C63FF" stroke-width="1.5"/>
             <text x="450" y="67" text-anchor="middle" fill="#6C63FF" font-size="13" font-weight="bold">Multica 总指挥</text>
             <text x="450" y="85" text-anchor="middle" fill="#8892A4" font-size="11">分配给各 Agent</text>
-            
-            <path d="M530 70 L565 70" stroke="#6C63FF" stroke-width="1.5" marker-end="url(#arr)"/>
-            
-            <rect x="565" y="45" width="130" height="50" rx="4" fill="#0A1628" stroke="#6C63FF" stroke-width="1.5"/>
+
+            <!-- 连线3: Multica → Code Agent -->
+            <path class="flow" d="M530 70 L565 70" stroke="#6C63FF" stroke-width="1.5" marker-end="url(#arr-purple)"/>
+            <circle r="3" fill="#6C63FF" opacity="0.9">
+              <animateMotion dur="1.5s" repeatCount="indefinite" begin="0.4s" path="M530 70 L565 70"/>
+              <animate attributeName="opacity" values="0.9;0.2;0.9" dur="1.5s" repeatCount="indefinite" begin="0.4s"/>
+            </circle>
+
+            <!-- Code Agent -->
+            <rect class="node-rect" x="565" y="45" width="130" height="50" rx="4" fill="#0A1628" stroke="#6C63FF" stroke-width="1.5"/>
             <text x="630" y="67" text-anchor="middle" fill="#6C63FF" font-size="13" font-weight="bold">Code Agent</text>
             <text x="630" y="85" text-anchor="middle" fill="#8892A4" font-size="11">并行编码开发</text>
-            
-            <path d="M695 70 L730 70" stroke="#00FF88" stroke-width="1.5" marker-end="url(#arr)"/>
-            
-            <rect x="730" y="45" width="130" height="50" rx="4" fill="#0A1628" stroke="#00FF88" stroke-width="1.5"/>
+
+            <!-- 连线4: Code → Review -->
+            <path class="flow" d="M695 70 L730 70" stroke="#00FF88" stroke-width="1.5" marker-end="url(#arr-green)"/>
+            <circle r="3" fill="#00FF88" opacity="0.9">
+              <animateMotion dur="1.5s" repeatCount="indefinite" begin="0.6s" path="M695 70 L730 70"/>
+              <animate attributeName="opacity" values="0.9;0.2;0.9" dur="1.5s" repeatCount="indefinite" begin="0.6s"/>
+            </circle>
+
+            <!-- Review Agent -->
+            <rect class="node-rect" x="730" y="45" width="130" height="50" rx="4" fill="#0A1628" stroke="#00FF88" stroke-width="1.5"/>
             <text x="795" y="65" text-anchor="middle" fill="#00FF88" font-size="13" font-weight="bold">Review Agent</text>
             <text x="795" y="82" text-anchor="middle" fill="#8892A4" font-size="11">代码质量审查</text>
-            <!-- 不通过回路 -->
-            <path d="M795 45 L795 20 L630 20 L630 45" stroke="#F87171" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr2)"/>
+
+            <!-- 连线5: Review → 不通过打回 → Code（回路） -->
+            <path class="flow" d="M795 45 L795 20 L630 20 L630 45" stroke="#F87171" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr2)"/>
+            <!-- 回路流动粒子（沿折线运动） -->
+            <circle r="3" fill="#F87171" opacity="0.8">
+              <animateMotion dur="2.5s" repeatCount="indefinite" begin="1s" path="M795 45 L795 20 L630 20 L630 45"/>
+              <animate attributeName="opacity" values="0.8;0.2;0.8" dur="2.5s" repeatCount="indefinite" begin="1s"/>
+            </circle>
             <text x="715" y="14" text-anchor="middle" fill="#F87171" font-size="11">不通过 → 打回重做</text>
-            
-            <path d="M860 70 L895 70" stroke="#FBBF24" stroke-width="1.5" marker-end="url(#arr)"/>
-            
-            <rect x="895" y="45" width="130" height="50" rx="4" fill="#0A1628" stroke="#FBBF24" stroke-width="1.5"/>
+
+            <!-- 连线6: Review → Test -->
+            <path class="flow" d="M860 70 L895 70" stroke="#FBBF24" stroke-width="1.5" marker-end="url(#arr-yellow)"/>
+            <circle r="3" fill="#FBBF24" opacity="0.9">
+              <animateMotion dur="1.5s" repeatCount="indefinite" begin="0.8s" path="M860 70 L895 70"/>
+              <animate attributeName="opacity" values="0.9;0.2;0.9" dur="1.5s" repeatCount="indefinite" begin="0.8s"/>
+            </circle>
+
+            <!-- Test Agent -->
+            <rect class="node-rect" x="895" y="45" width="130" height="50" rx="4" fill="#0A1628" stroke="#FBBF24" stroke-width="1.5"/>
             <text x="960" y="65" text-anchor="middle" fill="#FBBF24" font-size="13" font-weight="bold">Test Agent</text>
             <text x="960" y="82" text-anchor="middle" fill="#8892A4" font-size="11">自动化测试</text>
-            <!-- 测试不通过回路 -->
-            <path d="M960 95 L960 125 L630 125 L630 95" stroke="#F87171" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr2)"/>
+
+            <!-- 连线7: Test → 不通过返回 → Code（回路） -->
+            <path class="flow" d="M960 95 L960 125 L630 125 L630 95" stroke="#F87171" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr2)"/>
+            <circle r="3" fill="#F87171" opacity="0.8">
+              <animateMotion dur="3s" repeatCount="indefinite" begin="1.5s" path="M960 95 L960 125 L630 125 L630 95"/>
+              <animate attributeName="opacity" values="0.8;0.2;0.8" dur="3s" repeatCount="indefinite" begin="1.5s"/>
+            </circle>
             <text x="795" y="138" text-anchor="middle" fill="#F87171" font-size="11">测试不通过 → 返回开发</text>
-            
-            <path d="M1025 70 L1060 70" stroke="#00D4FF" stroke-width="1.5" marker-end="url(#arr)"/>
-            
-            <rect x="1060" y="45" width="220" height="50" rx="4" fill="#0A1628" stroke="#00D4FF" stroke-width="1.5"/>
+
+            <!-- 连线8: Test → 汇报进度 -->
+            <path class="flow" d="M1025 70 L1060 70" stroke="#00D4FF" stroke-width="1.5" marker-end="url(#arr)"/>
+            <circle r="3" fill="#00D4FF" opacity="0.9">
+              <animateMotion dur="1.5s" repeatCount="indefinite" begin="1s" path="M1025 70 L1060 70"/>
+              <animate attributeName="opacity" values="0.9;0.2;0.9" dur="1.5s" repeatCount="indefinite" begin="1s"/>
+            </circle>
+
+            <!-- @开发者 汇报进度 -->
+            <rect class="node-rect" x="1060" y="45" width="220" height="50" rx="4" fill="#0A1628" stroke="#00D4FF" stroke-width="1.5"/>
             <text x="1170" y="65" text-anchor="middle" fill="#00D4FF" font-size="13" font-weight="bold">@开发者 汇报进度</text>
             <text x="1170" y="82" text-anchor="middle" fill="#8892A4" font-size="11">全部完成，人工 Review 决策</text>
           </svg>

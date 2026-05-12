@@ -293,6 +293,7 @@ body {
     align-items: center;
     justify-content: center;
     background: #080F1A;
+    padding-left: 180px;
 }
 
 /* 编辑模式下侧栏用绝对定位，不参与 flex 流 */
@@ -330,6 +331,7 @@ body {
     align-items: center;
     justify-content: center;
     background: #000;
+    padding-left: 0;
 }
 
 .fullscreen-mode .slide-sidebar {

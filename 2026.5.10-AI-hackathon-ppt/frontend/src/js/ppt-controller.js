@@ -274,44 +274,19 @@ export class PPTController {
         const baseWidth = 1440
         const baseHeight = 810
 
-        // 编辑模式下减去侧栏宽度
         const sidebarWidth = this.isFullscreen ? 0 : 180
         const availWidth = window.innerWidth - sidebarWidth
         const availHeight = window.innerHeight
 
-        // 计算缩放比例（铺满可用区域，取宽高中较小值保持比例）
+        // 计算缩放比例
         const scaleX = availWidth / baseWidth
         const scaleY = availHeight / baseHeight
         const scale = Math.min(scaleX, scaleY)
 
-        // 应用缩放
         this.viewport.style.transform = `scale(${scale})`
-
-        if (!this.isFullscreen) {
-            // 编辑模式下，viewport 的视觉渲染需要居中在 sidebar 右侧可用区域内
-            // transform-origin: center center，视觉中心 = marginLeft + baseWidth / 2
-            // 视觉左边缘 = marginLeft + baseWidth/2 - (baseWidth*scale)/2
-            //            = marginLeft + (baseWidth/2) * (1 - scale)
-            // 视觉右边缘 = 视觉左边缘 + baseWidth * scale
-            // 要求视觉左边缘 >= sidebarWidth
-            const visualWidth = baseWidth * scale
-            // 可用区域居中时的 marginLeft：使视觉中心 = sidebarWidth + availWidth / 2
-            const areaCenter = sidebarWidth + availWidth / 2
-            const idealMargin = areaCenter - baseWidth / 2
-
-            // 视觉左边缘
-            const visualLeft = idealMargin + (baseWidth - visualWidth) / 2
-
-            // 如果视觉左边缘 < sidebarWidth，向右推
-            if (visualLeft < sidebarWidth) {
-                const push = sidebarWidth - visualLeft
-                this.viewport.style.marginLeft = `${idealMargin + push}px`
-            } else {
-                this.viewport.style.marginLeft = `${idealMargin}px`
-            }
-        } else {
-            this.viewport.style.marginLeft = '0px'
-        }
+        // 编辑模式下容器有 padding-left:180px，justify-content:center 天然在可用区域内居中
+        // 无需额外 marginLeft 偏移
+        this.viewport.style.marginLeft = '0px'
     }
 
     // ========== 缩略图相关 ==========

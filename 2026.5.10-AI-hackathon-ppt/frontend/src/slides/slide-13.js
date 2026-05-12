@@ -35,9 +35,9 @@ window.slideDataMap.set(13, `
         <div style="background:rgba(0,10,30,0.85);border:1px solid rgba(108,99,255,0.3);padding:18px;border-radius:4px;display:flex;flex-direction:column;gap:8px;position:relative;overflow:hidden;">
           <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#6C63FF,#A78BFA);"></div>
           <div style="font-size:13px;color:#8892A4;font-family:'Courier New',monospace;">KPI 02</div>
-          <div style="font-size:42px;font-weight:900;color:#6C63FF;font-family:'Montserrat',sans-serif;text-shadow:0 0 15px rgba(108,99,255,0.4);line-height:1;">50%</div>
-          <div style="font-size:16px;font-weight:700;color:#ffffff;font-family:'Montserrat','Noto Sans SC',sans-serif;">非核心时间降低</div>
-          <p style="font-size:13px;color:#8892A4;line-height:1.6;font-family:'Inter','Noto Sans SC',sans-serif;">Review、测试编写、日志排查由 Agent 承担，开发者聚焦 <span style="color:#CBD5E0;">架构设计和业务逻辑</span>。</p>
+          <div style="font-size:42px;font-weight:900;color:#6C63FF;font-family:'Montserrat',sans-serif;text-shadow:0 0 15px rgba(108,99,255,0.4);line-height:1;">串→并</div>
+          <div style="font-size:16px;font-weight:700;color:#ffffff;font-family:'Montserrat','Noto Sans SC',sans-serif;">关键路径压缩</div>
+          <p style="font-size:13px;color:#8892A4;line-height:1.6;font-family:'Inter','Noto Sans SC',sans-serif;">Review、测试等环节由 Agent <span style="color:#CBD5E0;">并行处理</span>，与编码同步推进，关键路径从串行变为并行，整体交付周期大幅缩短。</p>
         </div>
         <!-- KPI 3 -->
         <div style="background:rgba(0,10,30,0.85);border:1px solid rgba(0,255,136,0.25);padding:18px;border-radius:4px;display:flex;flex-direction:column;gap:8px;position:relative;overflow:hidden;">

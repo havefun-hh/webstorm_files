@@ -120,6 +120,12 @@ export class PPTController {
             slideDiv.appendChild(contentEl)
             this.viewport.appendChild(slideDiv)
             this.slides.push(slideDiv)
+            // 执行 innerHTML 中插入的 script 标签（浏览器不会自动执行 innerHTML 中的脚本）
+            contentEl.querySelectorAll('script').forEach(oldScript => {
+                const newScript = document.createElement('script')
+                newScript.textContent = oldScript.textContent
+                oldScript.parentNode.replaceChild(newScript, oldScript)
+            })
         })
     }
     

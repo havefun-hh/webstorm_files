@@ -227,15 +227,10 @@ export class PPTController {
         const baseWidth = 1440
         const baseHeight = 810
         
-        // 获取窗口尺寸（留出一些边距）
-        const padding = 20
-        const windowWidth = window.innerWidth - padding * 2
-        const windowHeight = window.innerHeight - padding * 2
-        
-        // 计算缩放比例（取最小值以确保完全显示）
-        const scaleX = windowWidth / baseWidth
-        const scaleY = windowHeight / baseHeight
-        const scale = Math.min(scaleX, scaleY, 1) // 不超过1倍
+        // 计算缩放比例（铺满窗口，无边距，取宽高中较小值保持比例）
+        const scaleX = window.innerWidth / baseWidth
+        const scaleY = window.innerHeight / baseHeight
+        const scale = Math.min(scaleX, scaleY)
         
         // 应用缩放
         this.viewport.style.transform = `scale(${scale})`

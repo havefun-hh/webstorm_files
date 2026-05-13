@@ -71,7 +71,7 @@ window.slideDataMap.set(8, `
           <div style="width:1px;height:50px;background:rgba(251,191,36,0.2);"></div>
           <div>
             <h4 style="font-size:16px;font-weight:700;color:#FBBF24;margin-bottom:6px;font-family:'Montserrat','Noto Sans SC',sans-serif;">方案与工具解耦</h4>
-            <p style="font-size:13px;color:#8892A4;font-family:'Inter','Noto Sans SC',sans-serif;">Multica 是当前阶段的选型，未来发现更好的平台时可无缝替换，Harness Engineering 核心理念和工作流保持不变。</p>
+            <p style="font-size:13px;color:#8892A4;font-family:'Inter','Noto Sans SC',sans-serif;">spec-kit、Multica 是当前阶段的选型，未来发现更好的平台时可对应替换，Harness Engineering 核心理念和工作流保持不变。</p>
           </div>
         </div>
       </div>

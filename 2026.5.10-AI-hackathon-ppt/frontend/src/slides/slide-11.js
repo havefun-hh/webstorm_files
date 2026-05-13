@@ -42,7 +42,7 @@ window.slideDataMap.set(11, `
               </div>
             </div>
           </div>
-          <p style="font-size:14px;color:#8892A4;line-height:1.7;font-family:'Inter','Noto Sans SC',sans-serif;">方案设计与具体工具解耦。Multica 是当前选型，未来发现更好的平台可<span style="color:#CBD5E0;">无缝替换</span>，核心 Harness Engineering 理念和工作流保持不变。</p>
+          <p style="font-size:14px;color:#8892A4;line-height:1.7;font-family:'Inter','Noto Sans SC',sans-serif;">方案设计与具体工具解耦。spec-kit、Multica 是当前选型，未来发现更好的平台可<span style="color:#CBD5E0;">替换</span>，核心 Harness Engineering 理念和工作流保持不变。</p>
           <div style="background:rgba(108,99,255,0.06);border:1px solid rgba(108,99,255,0.2);padding:12px;border-radius:4px;margin-top:auto;">
             <div style="font-size:12px;color:#8892A4;font-family:'Courier New',monospace;">方案耦合程度</div>
             <div style="font-size:22px;font-weight:900;color:#6C63FF;font-family:'Montserrat',sans-serif;">低耦合</div>

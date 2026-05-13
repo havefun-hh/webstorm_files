@@ -334,6 +334,17 @@ body {
     padding-left: 0;
 }
 
+/* 全屏模式下箭头按钮默认半透明，避免遮挡内容 */
+.fullscreen-mode .nav-btn {
+    opacity: 0.3;
+    background: rgba(255, 255, 255, 0.5);
+}
+.fullscreen-mode .nav-btn:hover {
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.95);
+    transform: translateY(-50%) scale(1.1);
+}
+
 .fullscreen-mode .slide-sidebar {
     width: 0;
     min-width: 0;

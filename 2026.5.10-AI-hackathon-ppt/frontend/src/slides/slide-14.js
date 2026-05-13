@@ -110,7 +110,7 @@ window.slideDataMap.set(14, `
           <!-- AI 工具试用截图 -->
           <div id="ss-area" style="flex:1;border:1.5px solid rgba(0,212,255,0.35);border-radius:6px;display:flex;flex-direction:column;overflow:hidden;background:rgba(0,10,30,0.6);position:relative;min-height:180px;">
             <img id="ss-cover" src="/assets/images/screenshots/0-使用spec-kit规约工具的chat记录.png" style="width:100%;flex:1;object-fit:cover;display:block;border-radius:5px 5px 0 0;" />
-            <div id="ss-btn-area" style="position:absolute;top:0;left:0;right:0;bottom:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(0,0,0,0.45);cursor:pointer;z-index:5;border-radius:6px;" onclick="document.getElementById('ss-modal').style.display='flex'">
+            <div id="ss-btn-area" style="position:absolute;top:0;left:0;right:0;bottom:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(0,0,0,0.45);cursor:pointer;z-index:5;border-radius:6px;" onclick="(function(){document.getElementById('ss-modal').style.display='flex';document.getElementById('pageIndicator').style.opacity='0';})()">
               <div style="width:50px;height:50px;background:rgba(0,212,255,0.85);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:8px;">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><rect x="3" y="3" width="18" height="18" rx="2" fill="none" stroke="#fff" stroke-width="2"/><circle cx="9" cy="10" r="2" fill="#fff"/><polyline points="16 8 21 14 16 14" fill="#fff"/></svg>
               </div>
@@ -123,7 +123,7 @@ window.slideDataMap.set(14, `
 
     <!-- 截图预览弹窗（幻灯片根层级，覆盖整个1440x810区域） -->
     <div id="ss-modal" style="display:none;position:absolute;top:0;left:0;width:1440px;height:810px;background:rgba(0,0,0,0.92);z-index:200;flex-direction:column;align-items:center;padding:30px 50px;">
-      <div style="position:absolute;top:14px;right:20px;cursor:pointer;z-index:201;color:#8892A4;font-size:22px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(255,255,255,0.08);" onclick="document.getElementById('ss-modal').style.display='none'">&#10005;</div>
+      <div style="position:absolute;top:14px;right:20px;cursor:pointer;z-index:201;color:#8892A4;font-size:22px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(255,255,255,0.08);" onclick="(function(){document.getElementById('ss-modal').style.display='none';document.getElementById('pageIndicator').style.opacity='1';})()">&#10005;</div>
       <div id="ss-title" style="font-size:18px;font-weight:700;color:#00D4FF;font-family:'Montserrat','Noto Sans SC',sans-serif;margin-bottom:14px;min-height:24px;flex-shrink:0;"></div>
       <div style="flex:1;width:100%;display:flex;align-items:center;justify-content:center;overflow:hidden;min-height:0;">
         <img id="ss-main-img" style="max-width:100%;max-height:100%;object-fit:contain;border-radius:4px;box-shadow:0 4px 30px rgba(0,0,0,0.5);" />
@@ -188,7 +188,7 @@ window.slideDataMap.set(14, `
       });
       showImg(0);
       document.addEventListener('keydown',function(e){
-        if(e.key==='Escape'){var m=document.getElementById('ss-modal');if(m)m.style.display='none';}
+        if(e.key==='Escape'){var m=document.getElementById('ss-modal');if(m&&m.style.display!=='none'){m.style.display='none';document.getElementById('pageIndicator').style.opacity='1';}}
       });
     })();
     </script>
